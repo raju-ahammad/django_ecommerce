@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %} cart {% endblock %}
+{% block content %}
+<div class="container">
+  <h3 class="text-center">Cart Page</h3>
+</div>
+<div class="container">
+
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Item No</th>
+        <th scope="col"> Image</th>
+
+        <th scope="col">Product Name</th>
+        <th scope="col"></th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in cart.product.all %}
+      <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td><img src="{{ product.image.url }}" style="width: 60px; height: 60px;" alt=""> </td>
+        <td><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></td>
+        <td>{% include 'carts/adcart.html' with product=product cart=cart %}</td>
+        <td>{{ product.price }}</td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <td> </td>
+        <td> </td>
+        <td> <b>subtotal  </b> </td>
+        <td>{{ cart.subtotal }}</td>
+      </tr>
+      <tr>
+        <td> </td>
+        <td></td>
+        <td> <b>Total</td>
+        <td>{{ cart.total }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-right">
+    <p class="text-right"><a class="btn btn-lg btn-success" href="{% url 'cheakout' %}">Cheakout</a></p>
+  </div>
+
+
+</div>
+
+{% endblock %}

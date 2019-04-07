@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} products {% endblock %}
+{% block content %}
+<h1 class="text-center">Home page</h1>
+<div class="container">
+  <div class="">
+    <div class="row">
+      {% for post in product %}
+      <div class="col-sm-3 ml-2 mr-1 mt-3">
+        <div class="card" style="width: 18rem;">
+        <a href="{% url 'slug_detail' post.slug %}"><img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap" style="height: 18rem;" ></a>
+         <div class="card-body">
+           <p><a href="{% url 'slug_detail' post.slug %}">{{ post.title }}</a></p>
+         </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

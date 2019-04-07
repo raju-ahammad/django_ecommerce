@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %} cart {% endblock %}
+{% block content %}
+<div class="container">
+  <div class="text-center">
+    <h1>CheakOut Page</h1>
+  </div>
+  <hr>
+  {{ object.order_id }} -- {{ object.cart }}
+  {% if not billing_profile %}
+    <div class="row">
+      <div class="col-sm-7">
+        <p>Login</p>
+        {% include 'form/forms.html' with form=login_form next=request.build_absulate_uri %}
+      </div>
+      <div class="col-sm-3">
+         <p>Continue as Guest</p>
+      </div>
+    </div>
+  {% else %}
+    <div class="text-center">
+      <p>Cart Total : {{ object.cart.total }}</p>
+      <p>Shiping fee : {{ object.shipping_total }}</p>
+      <p>Order Total : {{ object.total }}</p>
+    </div>
+    <div class="text-center">
+      <p>Name: <span>{{ object.cart.user.first_name }}</span> <span>{{ object.cart.user.last_name }}</span></p>
+      <p>UserName: <span>{{ object.cart.user.username }}</span></p>
+      <p>Email: <span>{{ object.cart.user.email }}</span></p>
+    </div>
+  {% endif %}
+
+</div>
+{% endblock %}
